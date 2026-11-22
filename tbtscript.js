@@ -151,7 +151,7 @@ function bukaBook(nomor, namaKonser) {
 var NOMOR_WA = "6285772589680";                 // nomor WA admin, awali 62
 // alamat Apps Script (rekap) untuk tiap konser, nomornya sama dengan bukaBook()
 var URL_REKAP = {
-  1: "https://script.google.com/macros/s/AKfycbzhGaoLEizZ5e73Auq0WaYVsNuge66PZ7buugq4Yj-YKQXL0wyikpde-_xSg9LQQVRD/exec",
+  1: "https://script.google.com/macros/s/AKfycbw3apgx56ChFQJ3Nj0U8Sl8xc4fcRSP8UQRiEb3AS2LcMGMS19MU5cZItGb--h_v-EPYQ/exec",
   2: "GANTI_URL_NCT_WISH",
   3: "GANTI_URL_EXO",
   4: "GANTI_URL_TXT"
