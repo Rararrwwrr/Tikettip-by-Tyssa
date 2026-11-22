@@ -21,7 +21,7 @@
       <ul>
         <li><a href="#" onclick="pindahHalaman('home'); return false;" data-nav="home" class="aktif">Home</a></li>
         <li class="dropdown">
-          <a href="#" onclick="pindahHalaman('about'); return false;" data-nav="about">About</a>
+          <a href="#" onclick="pindahHalaman('about'); bukaDropdown(this); return false;" data-nav="about">About</a>
           <ul class="submenu">
             <li><a href="#" onclick="pindahHalaman('about', 'about-started'); return false;">How It All Started</a></li>
             <li><a href="#" onclick="pindahHalaman('about', 'about-do'); return false;">What We Do</a></li>
@@ -29,7 +29,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" onclick="pindahHalaman('gallery'); return false;" data-nav="gallery">Gallery</a>
+          <a href="#" onclick="pindahHalaman('gallery'); bukaDropdown(this); return false;" data-nav="gallery">Gallery</a>
           <ul class="submenu">
             <li><a href="#" onclick="pindahHalaman('gallery', 'gallery-proofs'); return false;">Proofs Ticket</a></li>
             <li><a href="#" onclick="pindahHalaman('gallery', 'gallery-words'); return false;">Pretty Words</a></li>
@@ -250,6 +250,7 @@
       <p>Jaswar atau jasa war tiket merupakan layanan bantuan pembelian tiket konser saat penjualan tiket resmi dibuka. Kami akan membantu proses war sesuai kategori dan jumlah tiket yang diinginkan hingga proses pembelian berhasil. Berbeda dengan jastip, layanan jaswar hanya mencakup proses pembelian tiket dan tidak termasuk pengurusan penukaran e-ticket menjadi wristband.</p>
     </div>
   </div>
+
   <!-- popup booking -->
   <div class="modal" id="modal-book">
     <div class="modal-isi modal-lebar">
@@ -334,7 +335,7 @@
             <button type="button" onclick="keSlide('track-3', 4)" aria-label="Slide 5"></button>
           </div>
           <p>Tanggal, lokasi, dan deskripsi singkat konser ditulis di sini.</p>
-          <h4>Syarat dan ketentuan</h4>
+          <h4>Syarat dan Ketentuan</h4>
           <ol>
             <li>Wajib melakukan booking slot sebesar Rp50.000 untuk mengamankan slot pemesanan.</li>
             <li>Pengisian data bisa menggunakan data customer atau data admin.</li>
@@ -364,7 +365,7 @@
             <button type="button" onclick="keSlide('track-4', 4)" aria-label="Slide 5"></button>
           </div>
           <p>Tanggal, lokasi, dan deskripsi singkat konser ditulis di sini.</p>
-          <h4>Syarat dan ketentuan</h4>
+          <h4>Syarat dan Ketentuan</h4>
           <ol>
             <li>Wajib melakukan booking slot sebesar Rp50.000 untuk mengamankan slot pemesanan.</li>
             <li>Pengisian data bisa menggunakan data customer atau data admin.</li>
@@ -405,12 +406,21 @@
             <label><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
             <label><input type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
           </div>
+          <label for="bk-bukti">Bukti Transfer (Booking Fee)</label>
+          <input type="file" id="bk-bukti" name="bukti" accept="image/*">
           <label class="setuju"><input type="checkbox" name="setuju"> Saya sudah membaca syarat dan ketentuan.</label>
           <p class="status" id="status-book"></p>
+          <a id="link-wa" href="#" target="_blank" rel="noopener" hidden>Konfirmasi lewat WhatsApp</a>
           <button type="submit" class="read-more">Send</button>
         </form>
       </div>
     </div>
+  </div>
+
+  <!-- popup zoom gambar -->
+  <div class="modal" id="modal-zoom">
+    <button class="tutup" aria-label="Tutup" onclick="tutupModal('modal-zoom')">&times;</button>
+    <div class="zoom-isi"><img id="gambar-zoom" src="" alt=""></div>
   </div>
 
   <!-- footer -->
