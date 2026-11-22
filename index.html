@@ -393,27 +393,56 @@
             <label><input type="radio" name="type" value="Jaswar"> Jaswar</label>
             <label><input type="radio" name="type" value="Jastip"> Jastip</label>
           </div>
+          <label>Payment Type</label>
+          <div class="pilihan">
+            <label><input type="radio" name="payment" value="Full Payment" onchange="aturForm()"> Full Payment</label>
+            <label><input type="radio" name="payment" value="Self Payment" onchange="aturForm()"> Self Payment</label>
+          </div>
+          <div id="metode-bayar" hidden>
+            <label for="bk-metode">Metode Self Payment</label>
+            <input type="text" id="bk-metode" name="metode_bayar" placeholder="contoh: VA BCA">
+          </div>
           <label for="bk-email">Email</label>
           <input type="email" id="bk-email" name="email">
           <label for="bk-hp">No. HP</label>
           <input type="tel" id="bk-hp" name="hp">
-          <label for="bk-identitas">Nomor Identitas (KTP/Paspor)</label>
-          <input type="text" id="bk-identitas" name="identitas">
-          <label for="bk-lahir">Tanggal Lahir</label>
-          <input type="date" id="bk-lahir" name="lahir">
-          <label>Jenis Kelamin</label>
+          <label>Data Tiket</label>
           <div class="pilihan">
-            <label><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
-            <label><input type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
+            <label><input type="radio" name="data_tiket" value="Data Customer" checked onchange="aturForm()"> Data Customer</label>
+            <label><input type="radio" name="data_tiket" value="Data Admin" onchange="aturForm()"> Data Admin</label>
+          </div>
+          <div id="data-pribadi">
+            <label for="bk-identitas">Nomor Identitas (KTP/Paspor)</label>
+            <input type="text" id="bk-identitas" name="identitas">
+            <label for="bk-lahir">Tanggal Lahir</label>
+            <input type="date" id="bk-lahir" name="lahir">
+            <label>Jenis Kelamin</label>
+            <div class="pilihan">
+              <label><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
+              <label><input type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
+            </div>
+          </div>
+          <div class="info-bank">
+            <p>Transfer booking slot Rp50.000 ke:</p>
+            <p><b>SEA BANK</b> - 901458013108<br>a.n. Shabilla Adzkia Pramitha</p>
           </div>
           <label for="bk-bukti">Bukti Transfer (Booking Fee)</label>
           <input type="file" id="bk-bukti" name="bukti" accept="image/*">
           <label class="setuju"><input type="checkbox" name="setuju"> Saya sudah membaca syarat dan ketentuan.</label>
           <p class="status" id="status-book"></p>
-          <a id="link-wa" href="#" target="_blank" rel="noopener" hidden>Konfirmasi lewat WhatsApp</a>
           <button type="submit" class="read-more">Send</button>
         </form>
       </div>
+    </div>
+  </div>
+
+  <!-- popup terima kasih -->
+  <div class="modal" id="modal-terima">
+    <div class="modal-isi">
+      <button class="tutup" aria-label="Tutup" onclick="tutupModal('modal-terima')">&times;</button>
+      <h3>Terima kasih!</h3>
+      <p>Pesananmu sudah kami terima. Lanjutkan konfirmasi lewat WhatsApp ya.</p>
+      <a id="link-wa" class="read-more" href="#" target="_blank" rel="noopener">Chat via WhatsApp</a>
     </div>
   </div>
 
