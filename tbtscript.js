@@ -21,13 +21,13 @@ function pindahHalaman(nama, bagian) {
   }
 }
 
-// dropdown: muncul saat dipencet, hilang sendiri setelah 4 detik
+// dropdown: muncul saat dipencet, hilang sendiri setelah 3 detik
 var timerDropdown = null;
 
 function bukaDropdown(link) {
   tutupDropdown();
   link.parentElement.classList.add("buka");
-  timerDropdown = setTimeout(tutupDropdown, 4000);
+  timerDropdown = setTimeout(tutupDropdown, 3000);
 }
 
 function tutupDropdown() {
@@ -142,10 +142,10 @@ function bukaBook(nomor, namaKonser) {
 }
 
 // form booking
-var NOMOR_WA = "628XXXXXXXXXX";                 // nomor WA admin, awali 62
+var NOMOR_WA = "6285772589680";                 // nomor WA admin, awali 62
 // alamat Apps Script (rekap) untuk tiap konser, nomornya sama dengan bukaBook()
 var URL_REKAP = {
-  1: "GANTI_URL_ENHYPEN",
+  1: "https://script.google.com/macros/s/AKfycbwDcvSS1P0YeWJOmZFFAVxZO5sJrlDEn7RwoT5cCyEg8KN65uWi3stqaWA3YFyqVT5P/exec",
   2: "GANTI_URL_NCT_WISH",
   3: "GANTI_URL_EXO",
   4: "GANTI_URL_TXT"
@@ -219,7 +219,7 @@ function kirimBook() {
 
     status.textContent = "Terima kasih! Pesananmu sudah kami terima.";
     var wa = document.getElementById("link-wa");
-    wa.href = "https://wa.me/" + NOMOR_WA + "?text=" +
+    wa.href = "https://wa.me/" + 6285772589680 + "?text=" +
       encodeURIComponent("Halo Tikettip by Tyssa, aku sudah isi form booking " + konser + " atas nama " + nama + ".");
     wa.hidden = false;
     f.reset();
