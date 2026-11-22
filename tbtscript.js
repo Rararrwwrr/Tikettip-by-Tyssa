@@ -1,4 +1,6 @@
 // pindah halaman
+var waktuMulai = Date.now();
+
 function pindahHalaman(nama, bagian) {
   var semua = document.querySelectorAll(".view");
   for (var i = 0; i < semua.length; i++) {
@@ -7,6 +9,11 @@ function pindahHalaman(nama, bagian) {
   var halaman = document.getElementById("view-" + nama);
   halaman.classList.add("tampil");
   halaman.querySelector(".header").after(document.getElementById("teks-berjalan"));
+
+  // teks berjalan lanjut dari posisi terakhir, tidak mulai dari awal
+  var teksJalan = document.querySelector("#teks-berjalan p");
+  var lama = parseFloat(getComputedStyle(teksJalan).animationDuration);
+  teksJalan.style.animationDelay = "-" + (((Date.now() - waktuMulai) / 1000) % lama) + "s";
 
   var menu = document.querySelectorAll(".menu > ul > li > a, .tombol-nav");
   for (var j = 0; j < menu.length; j++) {
@@ -21,13 +28,13 @@ function pindahHalaman(nama, bagian) {
   }
 }
 
-// dropdown: muncul saat dipencet, hilang sendiri setelah 3 detik
+// dropdown: muncul saat dipencet, hilang sendiri setelah 4 detik
 var timerDropdown = null;
 
 function bukaDropdown(link) {
   tutupDropdown();
   link.parentElement.classList.add("buka");
-  timerDropdown = setTimeout(tutupDropdown, 3000);
+  timerDropdown = setTimeout(tutupDropdown, 4000);
 }
 
 function tutupDropdown() {
@@ -137,15 +144,14 @@ function bukaBook(nomor, namaKonser) {
   document.getElementById("book-judul").textContent = namaKonser;
   document.getElementById("konser").value = namaKonser;
   document.getElementById("status-book").textContent = "";
-  document.getElementById("link-wa").hidden = true;
   bukaModal("modal-book");
 }
 
 // form booking
-var NOMOR_WA = "6285772589680";                 // nomor WA admin, awali 62
+var NOMOR_WA = "628XXXXXXXXXX";                 // nomor WA admin, awali 62
 // alamat Apps Script (rekap) untuk tiap konser, nomornya sama dengan bukaBook()
 var URL_REKAP = {
-  1: "https://script.google.com/macros/s/AKfycbwDcvSS1P0YeWJOmZFFAVxZO5sJrlDEn7RwoT5cCyEg8KN65uWi3stqaWA3YFyqVT5P/exec",
+  1: "GANTI_URL_ENHYPEN",
   2: "GANTI_URL_NCT_WISH",
   3: "GANTI_URL_EXO",
   4: "GANTI_URL_TXT"
@@ -172,15 +178,40 @@ function kecilkanGambar(file, selesai) {
   reader.readAsDataURL(file);
 }
 
+// tampilkan atau sembunyikan isian sesuai pilihan
+function aturForm() {
+  var f = document.getElementById("form-book");
+  var pakaiAdmin = f.data_tiket.value == "Data Admin";
+  document.getElementById("data-pribadi").hidden = pakaiAdmin;
+  if (pakaiAdmin) {
+    f.identitas.value = "";
+    f.lahir.value = "";
+    var gender = document.querySelectorAll("[name=gender]");
+    for (var i = 0; i < gender.length; i++) {
+      gender[i].checked = false;
+    }
+  }
+  document.getElementById("metode-bayar").hidden = f.payment.value != "Self Payment";
+}
+
 function kirimBook() {
   var f = document.getElementById("form-book");
   var status = document.getElementById("status-book");
   var tombol = f.querySelector("button[type=submit]");
 
+  var pakaiAdmin = f.data_tiket.value == "Data Admin";
   if (f.nama.value == "" || f.section.value == "" || f.type.value == "" ||
-      f.email.value == "" || f.hp.value == "" || f.identitas.value == "" ||
-      f.lahir.value == "" || f.gender.value == "" || f.bukti.files.length == 0) {
+      f.payment.value == "" || f.email.value == "" || f.hp.value == "" ||
+      f.bukti.files.length == 0) {
     status.textContent = "Semua kolom wajib diisi ya.";
+    return false;
+  }
+  if (!pakaiAdmin && (f.identitas.value == "" || f.lahir.value == "" || f.gender.value == "")) {
+    status.textContent = "Data identitas wajib diisi kalau memakai data customer.";
+    return false;
+  }
+  if (f.payment.value == "Self Payment" && f.metode_bayar.value == "") {
+    status.textContent = "Isi metode self payment-nya dulu, misalnya VA BCA.";
     return false;
   }
   if (f.email.value.indexOf("@") == -1) {
@@ -217,14 +248,15 @@ function kirimBook() {
     data.bukti = gambar;
     fetch(url, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
 
-    status.textContent = "Terima kasih! Pesananmu sudah kami terima.";
-    var wa = document.getElementById("link-wa");
-    wa.href = "https://wa.me/" + 6285772589680 + "?text=" +
+    document.getElementById("link-wa").href = "https://wa.me/" + NOMOR_WA + "?text=" +
       encodeURIComponent("Halo Tikettip by Tyssa, aku sudah isi form booking " + konser + " atas nama " + nama + ".");
-    wa.hidden = false;
     f.reset();
+    aturForm();
     f.konser.value = konser;
+    status.textContent = "";
     tombol.disabled = false;
+    tutupModal("modal-book");
+    bukaModal("modal-terima");
   });
   return false;
 }
