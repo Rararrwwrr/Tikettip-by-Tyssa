@@ -181,8 +181,7 @@ img.gambar-slide { display: block; object-fit: cover; }
 .form .setuju { display: flex; align-items: center; gap: 8px; margin: 16px 0 0; font-weight: 400; }
 .form .pilihan input, .form .setuju input { width: auto; }
 .status { min-height: 1.5em; margin: 12px 0 0; color: var(--warna-tua); }
-#link-wa { display: block; margin: 8px 0 12px; color: var(--warna-tua); font-weight: 500; }
-#link-wa[hidden] { display: none; }
+#link-wa { text-decoration: none; }
 
 /* footer */
 .footer { margin-top: auto; padding: 24px 16px; background: var(--warna-utama); text-align: center; }
@@ -201,3 +200,12 @@ img.gambar-slide { display: block; object-fit: cover; }
   .foto { padding: 6px 6px 8px; }
   .foto figcaption { font-size: 0.75rem; }
 }
+
+/* paragraf rata kanan-kiri */
+.about p, .layanan p, .modal-isi p, main section > p { text-align: justify; }
+
+/* info rekening dan popup terima kasih */
+.info-bank { margin-top: 12px; padding: 12px; background: var(--warna-kartu); border: 1px solid var(--warna-garis); border-radius: 10px; font-size: 0.95rem; }
+.info-bank p { margin: 0; text-align: left; }
+#modal-terima .modal-isi { text-align: center; }
+#modal-terima p { margin: 0 0 16px; text-align: center; }
