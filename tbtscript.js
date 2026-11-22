@@ -7,12 +7,12 @@ function pindahHalaman(nama, bagian) {
   var halaman = document.getElementById("view-" + nama);
   halaman.classList.add("tampil");
   halaman.querySelector(".header").after(document.getElementById("teks-berjalan"));
- 
+
   var menu = document.querySelectorAll(".menu > ul > li > a, .tombol-nav");
   for (var j = 0; j < menu.length; j++) {
     menu[j].classList.toggle("aktif", menu[j].dataset.nav == nama);
   }
- 
+
   tutupDropdown();
   if (bagian) {
     document.getElementById(bagian).scrollIntoView();
@@ -20,16 +20,16 @@ function pindahHalaman(nama, bagian) {
     window.scrollTo(0, 0);
   }
 }
- 
+
 // dropdown: muncul saat dipencet, hilang sendiri setelah 4 detik
 var timerDropdown = null;
- 
+
 function bukaDropdown(link) {
   tutupDropdown();
   link.parentElement.classList.add("buka");
   timerDropdown = setTimeout(tutupDropdown, 4000);
 }
- 
+
 function tutupDropdown() {
   clearTimeout(timerDropdown);
   var semua = document.querySelectorAll(".dropdown");
@@ -37,13 +37,13 @@ function tutupDropdown() {
     semua[i].classList.remove("buka");
   }
 }
- 
+
 document.addEventListener("click", function (e) {
   if (!e.target.closest(".dropdown")) {
     tutupDropdown();
   }
 });
- 
+
 // popup
 function bukaModal(id) {
   document.getElementById(id).classList.add("buka");
@@ -54,28 +54,28 @@ function tutupModal(id) {
     clearInterval(timerSlide);
   }
 }
- 
+
 // slider poster
 var konserAktif = 1;
 var slideSekarang = 0;
 var timerSlide = null;
- 
+
 function tampilkanSlide(idTrack, nomor) {
   var track = document.getElementById(idTrack);
   track.style.transform = "translateX(-" + (nomor * 100) + "%)";
   slideSekarang = nomor;
- 
+
   var titik = track.closest(".info").querySelectorAll(".titik button");
   for (var i = 0; i < titik.length; i++) {
     titik[i].classList.toggle("aktif", i == nomor);
   }
 }
- 
+
 function keSlide(idTrack, nomor) {
   tampilkanSlide(idTrack, nomor);
   mulaiOtomatis();
 }
- 
+
 function mulaiOtomatis() {
   clearInterval(timerSlide);
   timerSlide = setInterval(function () {
@@ -84,7 +84,7 @@ function mulaiOtomatis() {
     tampilkanSlide(idTrack, (slideSekarang + 1) % jumlah);
   }, 3000);
 }
- 
+
 // geser poster dengan jari atau mouse
 var awalX = 0;
 var digeser = false;
@@ -107,7 +107,7 @@ for (var s = 0; s < semuaSlider.length; s++) {
     }
   });
 }
- 
+
 // klik gambar slide untuk zoom
 var gambarSlide = document.querySelectorAll(".slider img");
 for (var g = 0; g < gambarSlide.length; g++) {
@@ -123,7 +123,7 @@ for (var g = 0; g < gambarSlide.length; g++) {
 document.getElementById("gambar-zoom").addEventListener("click", function () {
   this.classList.toggle("besar");
 });
- 
+
 // klik poster konser
 function bukaBook(nomor, namaKonser) {
   var semua = document.querySelectorAll(".info");
@@ -131,7 +131,7 @@ function bukaBook(nomor, namaKonser) {
     semua[i].classList.remove("tampil");
   }
   document.getElementById("info-" + nomor).classList.add("tampil");
- 
+
   konserAktif = nomor;
   keSlide("track-" + nomor, 0);
   document.getElementById("book-judul").textContent = namaKonser;
@@ -140,7 +140,7 @@ function bukaBook(nomor, namaKonser) {
   document.getElementById("link-wa").hidden = true;
   bukaModal("modal-book");
 }
- 
+
 // form booking
 var NOMOR_WA = "628XXXXXXXXXX";                 // nomor WA admin, awali 62
 // alamat Apps Script (rekap) untuk tiap konser, nomornya sama dengan bukaBook()
@@ -150,7 +150,7 @@ var URL_REKAP = {
   3: "GANTI_URL_EXO",
   4: "GANTI_URL_TXT"
 };
- 
+
 // kecilkan foto bukti transfer sebelum dikirim
 function kecilkanGambar(file, selesai) {
   var reader = new FileReader();
@@ -171,12 +171,12 @@ function kecilkanGambar(file, selesai) {
   };
   reader.readAsDataURL(file);
 }
- 
+
 function kirimBook() {
   var f = document.getElementById("form-book");
   var status = document.getElementById("status-book");
   var tombol = f.querySelector("button[type=submit]");
- 
+
   if (f.nama.value == "" || f.section.value == "" || f.type.value == "" ||
       f.email.value == "" || f.hp.value == "" || f.identitas.value == "" ||
       f.lahir.value == "" || f.gender.value == "" || f.bukti.files.length == 0) {
@@ -196,12 +196,12 @@ function kirimBook() {
     status.textContent = "Data sudah valid, tapi rekapan belum disambungkan ke Google Sheets.";
     return false;
   }
- 
+
   var nama = f.nama.value;
   var konser = f.konser.value;
   tombol.disabled = true;
   status.textContent = "Mengirim...";
- 
+
   kecilkanGambar(f.bukti.files[0], function (gambar) {
     if (!gambar) {
       status.textContent = "Bukti transfer harus berupa gambar.";
@@ -216,7 +216,7 @@ function kirimBook() {
     });
     data.bukti = gambar;
     fetch(url, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
- 
+
     status.textContent = "Terima kasih! Pesananmu sudah kami terima.";
     var wa = document.getElementById("link-wa");
     wa.href = "https://wa.me/" + NOMOR_WA + "?text=" +
@@ -228,21 +228,3 @@ function kirimBook() {
   });
   return false;
 }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
