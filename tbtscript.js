@@ -82,11 +82,13 @@ function tampilkanSlide(idTrack, nomor) {
   }
 }
 
+// dipanggil saat titik diklik atau poster digeser: otomatis berhenti
 function keSlide(idTrack, nomor) {
   tampilkanSlide(idTrack, nomor);
-  mulaiOtomatis();
+  clearInterval(timerSlide);
 }
 
+// geser otomatis hanya jalan saat popup baru dibuka
 function mulaiOtomatis() {
   clearInterval(timerSlide);
   timerSlide = setInterval(function () {
@@ -124,6 +126,7 @@ var gambarSlide = document.querySelectorAll(".slider img");
 for (var g = 0; g < gambarSlide.length; g++) {
   gambarSlide[g].addEventListener("click", function () {
     if (digeser) return;
+    clearInterval(timerSlide);
     var besar = document.getElementById("gambar-zoom");
     besar.src = this.src;
     besar.alt = this.alt;
@@ -144,7 +147,8 @@ function bukaBook(nomor, namaKonser) {
   document.getElementById("info-" + nomor).classList.add("tampil");
 
   konserAktif = nomor;
-  keSlide("track-" + nomor, 0);
+  tampilkanSlide("track-" + nomor, 0);
+  mulaiOtomatis();
   document.getElementById("book-judul").textContent = namaKonser;
   document.getElementById("konser").value = namaKonser;
   document.getElementById("status-book").textContent = "";
