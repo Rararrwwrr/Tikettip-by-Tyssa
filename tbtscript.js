@@ -1,6 +1,10 @@
 // pindah halaman
 var waktuMulai = Date.now();
 
+// nomor konser yang ada PayLater (sesuai angka di bukaBook)
+// contoh: [1] = hanya konser 1, [1, 2] = konser 1 dan 2, [] = tidak ada
+var konserPaylater = [1];
+
 function pindahHalaman(nama, bagian) {
   var semua = document.querySelectorAll(".view");
   for (var i = 0; i < semua.length; i++) {
@@ -144,6 +148,17 @@ function bukaBook(nomor, namaKonser) {
   document.getElementById("book-judul").textContent = namaKonser;
   document.getElementById("konser").value = namaKonser;
   document.getElementById("status-book").textContent = "";
+
+  // PayLater hanya muncul untuk konser yang ada di daftar konserPaylater
+  var opsiPaylater = document.getElementById("opsi-paylater");
+  var adaPaylater = konserPaylater.indexOf(nomor) != -1;
+  opsiPaylater.hidden = !adaPaylater;
+  var radioPaylater = opsiPaylater.querySelector("input");
+  if (!adaPaylater && radioPaylater.checked) {
+    radioPaylater.checked = false;
+    aturForm();
+  }
+
   bukaModal("modal-book");
 }
 
@@ -248,7 +263,7 @@ function kirimBook() {
     data.bukti = gambar;
     fetch(url, { method: "POST", mode: "no-cors", body: JSON.stringify(data) });
 
-    document.getElementById("link-wa").href = "https://wa.me/" + 6285772589680 + "?text=" +
+    document.getElementById("link-wa").href = "https://wa.me/" + NOMOR_WA + "?text=" +
       encodeURIComponent("Halo Tikettip by Tyssa, aku sudah isi form booking " + konser + " atas nama " + nama + ".");
     f.reset();
     aturForm();
