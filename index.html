@@ -213,7 +213,7 @@
             <p>ENHYPEN WORLD TOUR ‘BOLD SAGA’ IN JAKARTA</p>
             <span class="badge badge-booking">Book Now</span>
           </button>
-           <button class="poster-btn" onclick="bukaBook(2, 'EXO-KASE FANCON TOUR  ‘SILENT CITY’ IN JAKARTA')">
+          <button class="poster-btn" onclick="bukaBook(2, 'EXO-KASE FANCON TOUR  ‘SILENT CITY’ IN JAKARTA')">
             <img src="Images/KASE(1).png" alt="Poster EXO-KASE">
             <p>EXO-KASE FANCON TOUR  ‘SILENT CITY’ IN JAKARTA</p>
             <span class="badge badge-booking">Book Now</span>
@@ -259,8 +259,11 @@
   <!-- popup booking -->
   <div class="modal" id="modal-book">
     <div class="modal-isi modal-lebar">
-      <button class="tutup" aria-label="Tutup" onclick="tutupModal('modal-book')">&times;</button>
-      <h3 id="book-judul"></h3>
+      <div class="modal-kepala">
+        <h3 id="book-judul"></h3>
+        <button class="tutup" aria-label="Tutup" onclick="tutupModal('modal-book')">&times;</button>
+      </div>
+      <div class="modal-badan">
       <div class="detail">
         <div class="info" id="info-1">
           <div class="slider">
@@ -438,6 +441,7 @@
           <p class="status" id="status-book"></p>
           <button type="submit" class="read-more">Send</button>
         </form>
+      </div>
       </div>
     </div>
   </div>
