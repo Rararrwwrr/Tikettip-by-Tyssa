@@ -172,8 +172,8 @@ var NOMOR_WA = "6285772589680";                 // nomor WA admin, awali 62
 var URL_REKAP = {
   1: "https://script.google.com/macros/s/AKfycbw3apgx56ChFQJ3Nj0U8Sl8xc4fcRSP8UQRiEb3AS2LcMGMS19MU5cZItGb--h_v-EPYQ/exec",
   2: "https://script.google.com/macros/s/AKfycbzGF9Otftzqj8mG5uzrJOygs6BHmuwKMBlaI6GTg-lliSJR1oW7Csm_8Zu-OhktzoQglw/exec",
-  3: "GANTI_URL_EXO",
-  4: "GANTI_URL_TXT"
+  3: "https://script.google.com/macros/s/AKfycbwMCO0nU3Neor5qPD_c0kDTwdTl5B0dWErpiqx62JMjKn3-gdjKdE5UfIZwi2NZengf/exec",
+  4: "GANTI_URL"
 };
 
 // kecilkan foto bukti transfer sebelum dikirim
